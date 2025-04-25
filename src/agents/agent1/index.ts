@@ -5,12 +5,22 @@ import { openai } from "@ai-sdk/openai";
 export default async function Agent(
 	req: AgentRequest,
 	resp: AgentResponse,
-	ctx: AgentContext,
+	ctx: AgentContext
 ) {
+	console.log("beans");
+	// ctx.kv.set("beans", "beans", "beans");
 	const res = await generateText({
 		model: openai("gpt-4o"),
 		system: "You are a friendly assistant!",
 		prompt: req.data.text ?? "Why is the sky blue?",
 	});
-	return resp.text(res.text);
+
+	const agent = await ctx.getAgent({ name: "agent2" });
+
+	const agent2res = await agent.run({
+		data: res.text,
+		contentType: "text/plain",
+	});
+
+	return resp.text(agent2res.data.text);
 }

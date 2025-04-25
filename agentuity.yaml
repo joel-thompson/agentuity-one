@@ -71,3 +71,6 @@ agents:
     id: agent_6ef62f77810bf7d45e127c498d78280b
     # The name of the Agent which is editable
     name: agent1
+  - id: agent_d1438776659d2912ba61c5c146db3882
+    name: agent2
+    description: summarizes some text
